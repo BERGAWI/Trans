@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="inherit_analytic_account_id" model="ir.ui.view">
+            <field name="name">inerit analytic account id</field>
+            <field name="model">account.analytic.plan</field>
+            <field name="inherit_id" ref="analytic.account_analytic_plan_form_view"/>
+            <field name="arch" type="xml">
+
+                    <xpath expr="//field[@name='color']" position="after">
+                        <field name="branch_id"/>
+                    </xpath>
+
+            </field>
+        </record>
+
+        <record id="inherit_analytic_plan_tree_view" model="ir.ui.view">
+            <field name="name">inerit analytic plan tree view</field>
+            <field name="model">account.analytic.plan</field>
+            <field name="inherit_id" ref="analytic.account_analytic_plan_tree_view"/>
+            <field name="arch" type="xml">
+                    <xpath expr="//tree//field[@name='color']" position="before">
+                        <field name="branch_id"/>
+                    </xpath>
+
+                    <xpath expr="//tree//field[@name='color']" position="after">
+                        <field name="is_b_id_true" invisible="1"/>
+                    </xpath>
+            </field>
+        </record>
+
+        <record id="account_analytic_plan_search_view" model="ir.ui.view">
+            <field name="name">account analytic plan search view</field>
+            <field name="model">account.analytic.plan</field>
+            <field name="arch" type="xml">
+                <search>
+                    <filter string="Branch" name="branch_id" domain="[('is_b_id_true', '=', True)]"/>
+                    <separator/>
+                </search>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>
